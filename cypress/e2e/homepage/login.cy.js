@@ -17,7 +17,7 @@ describe('login as standard user', function () {
         .type('secret_sauce{enter}')
 
         // verify the correct URL redirect
-        cy.url().should('include', '/inventory.html')
+        cy.location('pathname').should('equal', '/inventory.html')
         cy.get('.app_logo').should('contain', "Swag Labs")
     });
 });
@@ -34,10 +34,10 @@ describe('login as a locked out user', function () {
         cy.get('#password').click()
         .type('secret_sauce{enter}')
 
-        // verify the error messages
+        // verify the path and error messages
+        cy.location('pathname').should('equal', '/')
+
         cy.get('h3[data-test="error"]')
         .should('contain', "Epic sadface: Sorry, this user has been locked out");
     });
 });
-
-// 
