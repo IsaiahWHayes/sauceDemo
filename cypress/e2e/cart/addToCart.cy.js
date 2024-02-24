@@ -1,7 +1,5 @@
 /// <reference types = "cypress" />
 
-import { AnimationFrameScheduler } from "rxjs/internal/scheduler/AnimationFrameScheduler"
-
 // tests to be run
 describe('add an item to cart', function () {
 
