@@ -44,4 +44,13 @@ describe('add an item to cart', function () {
         cy.get('.cart_item>.cart_quantity')
         .should('contain', '1')
     })
+
+    // remove items from the cart
+    it('removes items from the cart', function () {
+        cy.get('[data-test = add-to-cart-sauce-labs-backpack]').click()
+        cy.get('span[class = shopping_cart_badge').click()
+
+        cy.get('[data-test = remove-sauce-labs-backpack]').click()
+        cy.get('span[class = shopping_cart_badge').should('not.exist')
+    })
 })
