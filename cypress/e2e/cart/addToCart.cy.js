@@ -53,4 +53,25 @@ describe('add an item to cart', function () {
         cy.get('[data-test = remove-sauce-labs-backpack]').click()
         cy.get('span[class = shopping_cart_badge').should('not.exist')
     })
+
+    // add's customer info, then goes to the checkout page
+    it('enter\'s information into the checkout form', function () {
+        cy.get('[data-test = add-to-cart-sauce-labs-backpack]').click()
+
+        cy.get('span[class = shopping_cart_badge').click()
+
+        cy.get('[data-test = checkout]').click()
+
+        // enter's info into the form
+        cy.get('[data-test = firstName]').click()
+        .type('Test')
+        cy.get('[data-test = lastName]').click()
+        .type('User')
+        cy.get('[data-test = postalCode]').click()
+        .type('90018')
+
+        // go to the next page
+        cy.get('[data-test = continue]').click()
+        cy.location('pathname').should('equal', '/checkout-step-two.html')
+    })
 })
