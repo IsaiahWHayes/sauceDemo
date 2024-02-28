@@ -16,6 +16,15 @@ describe('select and purchase an item', function () {
 
         // verify the login is successful
         cy.location('pathname').should('equal', '/inventory.html')
+
+    // Check if "remove" button is displayed
+    cy.get('.pricebar').children('.btn').then(($removeButton) => {
+        if($removeButton.text().includes('Remove')) {
+            cy.get('.btn.btn_secondary.btn_small.btn_inventory').click()
+        }
+    })
+
+
     });
 
     afterEach('reset the application state', function () {
@@ -25,7 +34,7 @@ describe('select and purchase an item', function () {
     })
 
     // add an item to the cart
-    it('add\'s an item to the cart', function () {
+    it('selects an item to purchase', function () {
         cy.get('[data-test = add-to-cart-sauce-labs-backpack]').click()
 
         cy.get('span[class = shopping_cart_badge') // verify the correct badge number
@@ -55,7 +64,7 @@ describe('select and purchase an item', function () {
     })
 
     // completes an order
-    it('enter\'s information into the checkout form', function () {
+    it('completes a purchase', function () {
         // add's an item, then goes to customer info page
         cy.get('[data-test = add-to-cart-sauce-labs-backpack]').click()
         cy.get('span[class = shopping_cart_badge').click()

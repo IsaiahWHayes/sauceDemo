@@ -5,9 +5,9 @@ beforeEach('visit the suace demo website', function () {
 });
 
 // successful login as a standard user
-describe('login as standard user', function () {
+describe('standard user', function () {
     
-    it('adds the "standard user" credentials', function () {
+    it('signs in as a standard user', function () {
 
         // login with valid credentials
         cy.get('#user-name').click()
@@ -24,8 +24,8 @@ describe('login as standard user', function () {
 
 
 // attempt to login as a locked out user
-describe('login as a locked out user', function () {
-    it("blocks the locked out user from signing in", function () {
+describe('locked out user', function () {
+    it("shows the correct error message", function () {
 
         // login with the correct credentials for this locked out user
         cy.get('#user-name').click()

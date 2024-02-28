@@ -19,7 +19,7 @@ beforeEach('login to the application', function () {
 // logout successfully
 describe('logout successfully', function () {
 
-    it('logs out as a a standard user', function () {
+    it('logs out and redirects correctly', function () {
         cy.get('#react-burger-menu-btn').click() // hamburger menu
 
         cy.get('#logout_sidebar_link').click() // logout button
