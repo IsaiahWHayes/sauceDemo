@@ -17,14 +17,12 @@ describe('select and purchase an item', function () {
         // verify the login is successful
         cy.location('pathname').should('equal', '/inventory.html')
 
-    // Check if "remove" button is displayed
-    cy.get('.pricebar').children('.btn').then(($removeButton) => {
-        if($removeButton.text().includes('Remove')) {
-            cy.get('.btn.btn_secondary.btn_small.btn_inventory').click()
-        }
-    })
-
-
+        // Check if "remove" button is displayed
+        cy.get('.pricebar').children('.btn').then(($removeButton) => {
+            if($removeButton.text().includes('Remove')) {
+                cy.get('.btn.btn_secondary.btn_small.btn_inventory').click()
+            }
+        })
     });
 
     afterEach('reset the application state', function () {
