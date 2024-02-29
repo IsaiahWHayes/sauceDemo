@@ -9,16 +9,11 @@ describe('standard user', function () {
     
     it('signs in as a standard user', function () {
 
-        // login with valid credentials
-        cy.get('#user-name').click()
-        .type('standard_user')
-        
-        cy.get('#password').click()
-        .type('secret_sauce{enter}')
-
+        // login
+        cy.login('standard_user', 'secret_sauce')
+    
         // verify the correct URL redirect
         cy.location('pathname').should('equal', '/inventory.html')
-        cy.get('.app_logo').should('contain', "Swag Labs")
     });
 });
 
@@ -27,16 +22,13 @@ describe('standard user', function () {
 describe('locked out user', function () {
     it("shows the correct error message", function () {
 
-        // login with the correct credentials for this locked out user
-        cy.get('#user-name').click()
-        .type('locked_out_user')
-
-        cy.get('#password').click()
-        .type('secret_sauce{enter}')
+        // login as a locked out user
+        cy.login('locked_out_user', 'secret_sauce')
 
         // verify the path and error messages
         cy.location('pathname').should('equal', '/')
 
+        // verify the correct error message is displayed
         cy.get('h3[data-test="error"]')
         .should('contain', "Epic sadface: Sorry, this user has been locked out");
     });

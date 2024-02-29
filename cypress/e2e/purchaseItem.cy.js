@@ -7,14 +7,10 @@ describe('select and purchase an item', function () {
     beforeEach('login as a standard user', function () {
         cy.visit('/')
 
-        // enter valid credentials
-        cy.get('#user-name').click() // username
-        .type('standard_user')
+        // // login as standard_user
+        cy.login('standard_user', 'secret_sauce')
 
-        cy.get('#password').click() // password
-        .type('secret_sauce{enter}')
-
-        // verify the login is successful
+        // validate the page
         cy.location('pathname').should('equal', '/inventory.html')
 
         // Check if "remove" button is displayed

@@ -5,12 +5,8 @@ describe('be sure each webpage works', function () {
     beforeEach('visit the sauce demo website', function () {
         cy.visit('/')
 
-        // enter valid credentials
-        cy.get('#user-name').click() // username
-        .type('standard_user')
-
-        cy.get('#password').click() // password
-        .type('secret_sauce{enter}')
+        // login as standard user
+        cy.login('standard_user', 'secret_sauce')
 
         // verify the login is successful
         cy.location('pathname').should('equal', '/inventory.html')
@@ -23,14 +19,14 @@ describe('be sure each webpage works', function () {
         })
     })
 
-    it('navigates to all item\'s page', function () {
+    it('navigates to All Item\'s page', function () {
         cy.get('#react-burger-menu-btn').click() // hamburger menu
         
         cy.contains(/all items/i).click()
         cy.location('pathname', '/').should('exist')
     })
 
-    it('navigates to About section', function () {
+    it('navigates to About page', function () {
         cy.get('#react-burger-menu-btn').click() // hamburger menu
 
         cy.contains(/about/i).then(($about) => {

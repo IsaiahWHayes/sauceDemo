@@ -4,12 +4,7 @@
 beforeEach('login to the application', function () {
     cy.visit('/')
 
-    // enter valid credentials
-    cy.get('#user-name').click() // username
-    .type('standard_user')
-
-    cy.get('#password').click() // password
-    .type('secret_sauce{enter}')
+    cy.login('standard_user', 'secret_sauce')
 
     // verify the login is successful
     cy.location('pathname').should('equal', '/inventory.html')
