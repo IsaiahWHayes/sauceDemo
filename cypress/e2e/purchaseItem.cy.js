@@ -50,34 +50,26 @@ describe('select and purchase an item', function () {
 
     // remove items from the cart
     it('removes items from the cart', function () {
+        // adds item to cart, then goes to cart
         cy.get('[data-test = add-to-cart-sauce-labs-backpack]').click()
         cy.get('span[class = shopping_cart_badge').click()
 
+        // removes item from cart, then verifies the removal
         cy.get('[data-test = remove-sauce-labs-backpack]').click()
         cy.get('span[class = shopping_cart_badge').should('not.exist')
     })
 
     // completes an order
     it('completes a purchase', function () {
-        // add's an item, then goes to customer info page
-        cy.get('[data-test = add-to-cart-sauce-labs-backpack]').click()
-        cy.get('span[class = shopping_cart_badge').click()
-        cy.get('[data-test = checkout]').click()
+        cy.completePurchase();
+    })
 
-        // enter's info into the form
-        cy.get('[data-test = firstName]').click()
-        .type('Test')
-        cy.get('[data-test = lastName]').click()
-        .type('User')
-        cy.get('[data-test = postalCode]').click()
-        .type('90018')
+    //returns home after making a purchase
+    it('returns home after checkout', function () {
+        cy.completePurchase() // successfully complete a purchase
 
-        // goes to the checkout page
-        cy.get('[data-test = continue]').click()
-        cy.location('pathname').should('equal', '/checkout-step-two.html')
+        cy.get('[data-test = back-to-products]').click() // click the "back to homepage" button
 
-        // go to the confirmation page
-        cy.get('[data-test = finish]').click()
-        cy.location('pathname').should('equal', '/checkout-complete.html')
+        cy.location('pathname').should('equal', '/inventory.html') // verify the correct page
     })
 })

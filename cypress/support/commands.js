@@ -36,3 +36,26 @@ Cypress.Commands.add('login', (username, password) => {
     cy.get('[data-test = login-button]')
     .click()
 })
+
+Cypress.Commands.add('completePurchase', function () {
+        // add's an item, then goes to customer info page
+        cy.get('[data-test = add-to-cart-sauce-labs-backpack]').click()
+        cy.get('span[class = shopping_cart_badge').click()
+        cy.get('[data-test = checkout]').click()
+
+        // enter's info into the form
+        cy.get('[data-test = firstName]').click()
+        .type('Test')
+        cy.get('[data-test = lastName]').click()
+        .type('User')
+        cy.get('[data-test = postalCode]').click()
+        .type('90018')
+
+        // goes to the checkout page
+        cy.get('[data-test = continue]').click()
+        cy.location('pathname').should('equal', '/checkout-step-two.html')
+
+        // go to the confirmation page
+        cy.get('[data-test = finish]').click()
+        cy.location('pathname').should('equal', '/checkout-complete.html')
+    })
